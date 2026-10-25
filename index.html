@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore free online tools for blog writing, SEO, YouTube titles, social media captions, image prompts and business content.">
+<meta name="theme-color" content="#101828">
+<title>AI Free Tools Hub | Free Online Writing & SEO Tools</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f6f8fc;color:#172033}
+header{background:#101828;color:white;padding:22px 6%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:bold}
+.logo span{color:#60a5fa}
+header a{color:white;text-decoration:none;margin-left:15px}
+.hero{text-align:center;padding:55px 18px 40px;background:linear-gradient(135deg,#e0eaff,#f8faff)}
+.hero h1{font-size:clamp(30px,5vw,46px);margin:0 0 15px}
+.hero p{color:#526078;line-height:1.7}
+.search{width:min(600px,100%);padding:15px;border:1px solid #d8deea;border-radius:12px;font-size:16px;margin-top:15px}
+.wrap{max-width:1100px;margin:auto;padding:30px 18px}
+h2{margin-top:15px}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.categories button{border:1px solid #dbe2ef;background:white;padding:10px 15px;border-radius:22px;cursor:pointer}
+.categories button:hover,.categories button.active{background:#1d4ed8;color:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:white;border:1px solid #e6eaf2;border-radius:15px;padding:22px;box-shadow:0 4px 15px #17203308}
+.icon{font-size:30px}
+.card h3{margin:13px 0 8px}
+.card p{color:#637087;line-height:1.6;min-height:48px}
+button,.use{cursor:pointer}
+.primary{border:0;background:#2458df;color:white;padding:12px 17px;border-radius:9px;font-weight:bold}
+.primary:hover{background:#1646c0}
+.toolbox{display:none;background:white;padding:24px;border-radius:15px;margin-top:30px;border:1px solid #e1e7f0}
+.toolbox.show{display:block}
+label{display:block;font-weight:bold;margin:16px 0 8px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #cfd7e5;border-radius:9px;font:inherit}
+textarea{min-height:100px;resize:vertical}
+.output{white-space:pre-wrap;background:#f5f7fb;border-radius:10px;padding:16px;margin-top:15px;line-height:1.7;overflow-wrap:anywhere}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+footer{text-align:center;padding:30px 15px;background:#101828;color:#e2e8f0;margin-top:40px;line-height:2}
+footer a{color:#bfdbfe;margin:0 8px}
+@media(max-width:500px){header{padding:18px}.logo{font-size:20px}.hero{padding-top:40px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">AI <span>Free Tools</span> Hub</div>
+  <nav><a href="#tools">Tools</a><a href="#about">About</a></nav>
+</header>
+
+<section class="hero">
+  <h1>Free Tools for Smarter Work</h1>
+  <p>Create blog ideas, SEO descriptions, YouTube titles and more.<br>Simple, useful and free to use.</p>
+  <input class="search" id="search" placeholder="Search free tools..." aria-label="Search tools">
+</section>
+
+<main class="wrap" id="tools">
+  <h2>Explore Free Tools</h2>
+  <p>Choose a tool to get started.</p>
+  <div class="categories" id="categories">
+    <button class="active" data-cat="All">All Tools</button>
+    <button data-cat="Writing">Writing</button>
+    <button data-cat="SEO">SEO</button>
+    <button data-cat="Social">Social Media</button>
+    <button data-cat="Business">Business</button>
+    <button data-cat="Creative">Creative</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <section class="toolbox" id="toolbox">
+    <h2 id="toolTitle">Your Tool</h2>
+    <p id="toolDescription"></p>
+    <label for="topic">Enter your topic or details</label>
+    <textarea id="topic" placeholder="For example: Best AI tools for bloggers"></textarea>
+    <label for="tone">Writing style</label>
+    <select id="tone">
+      <option>Professional</option>
+      <option>Friendly</option>
+      <option>Creative</option>
+      <option>Simple</option>
+    </select>
+    <div class="actions">
+      <button class="primary" id="generate">Generate</button>
+      <button class="primary" id="clear" style="background:#64748b">Clear</button>
+    </div>
+    <div id="result" class="output" hidden></div>
+    <div class="actions" id="resultActions" hidden>
+      <button class="primary" id="copy">Copy Result</button>
+      <button class="primary" id="download" style="background:#475569">Download TXT</button>
+    </div>
+  </section>
+
+  <section id="about" style="margin-top:45px;line-height:1.8">
+    <h2>About AI Free Tools Hub</h2>
+    <p>Our goal is to make everyday writing, content planning and online marketing tasks easier with simple, accessible tools.</p>
+    <p>These starter tools use templates and browser-based rules. They do not require a paid AI API.</p>
+  </section>
+</main>
+
+<footer>
+  <strong>AI Free Tools Hub</strong><br>
+  Free online tools for everyday tasks.
+  <p>
+    <a href="#about">About Us</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="contact.html">Contact</a>
+  </p>
+  <small>© <span id="year"></span> AI Free Tools Hub</small>
+</footer>
+
+<script>
+const tools = [
+{id:1,name:"Blog Title Generator",icon:"✍️",cat:"Writing",desc:"Generate blog title ideas.",hint:"Enter a blog topic",make:(t)=>[
+"Complete Guide to "+t,
+"10 Things to Know About "+t,
+"How to Get Started with "+t,
+"Best Tips and Ideas for "+t,
+"Common Mistakes to Avoid with "+t,
+"Beginner's Guide to "+t,
+"Pros and Cons of "+t,
+"How to Improve Your "+t,
+t+": Tips, Benefits and Ideas",
+"Everything You Need to Know About "+t].join("\n")},
+{id:2,name:"Meta Description Generator",icon:"🔍",cat:"SEO",desc:"Create a search description draft.",hint:"Enter page topic",make:(t)=>"Discover "+t+". Explore useful tips, key features, practical ideas and a simple guide to help you get started. Read more to learn about "+t+".\n\nReview and edit this draft to accurately reflect your page and target keywords."},
+{id:3,name:"Blog Outline Generator",icon:"📑",cat:"Writing",desc:"Plan your next blog post.",hint:"Enter blog topic",make:(t)=>"H1: "+t+"\n\nIntroduction\n- Introduce the topic\n- Explain why it matters\n\nH2: What Is "+t+"?\nH2: Key Benefits\nH2: Important Features\nH2: Step-by-Step Guide\nH2: Practical Tips and Examples\nH2: Common Mistakes to Avoid\nH2: Frequently Asked Questions\n\nConclusion\n- Summarize key points\n- Suggest a useful next step"},
+{id:4,name:"YouTube Title Generator",icon:"▶️",cat:"Creative",desc:"Create video title variations.",hint:"Enter video topic",make:(t)=>["How to "+t+" (Beginner's Guide)",""+t+": Everything You Need to Know","7 Tips for "+t,"The Simple Way to Understand "+t,""+t+" Explained Step by Step","What You Should Know About "+t,"A Practical Guide to "+t,""+t+": Tips, Tricks and Ideas"].join("\n")},
+{id:5,name:"Social Media Caption",icon:"📱",cat:"Social",desc:"Draft captions for social posts.",hint:"Enter post topic",make:(t,tone)=>"✨ "+t+" deserves your attention!\n\n"+(tone==="Professional"?"Explore the key ideas, discover practical insights and find new ways to get started.":"Discover new ideas, try something different and make your next step count!")+"\n\nWhat do you think? Share your thoughts below.\n\n#"+t.split(/\s+/).filter(Boolean).slice(0,3).join("")+" #Tips #Ideas"},
+{id:6,name:"AI Image Prompt Generator",icon:"🖼️",cat:"Creative",desc:"Build detailed prompts for image tools.",hint:"Describe the image you want",make:(t,tone)=>"Create a high-quality image of "+t+". Style: "+tone+". Composition: clear focal subject, balanced framing, thoughtful background details, natural lighting, realistic textures, harmonious colors and professional visual quality. Aspect ratio: 16:9. Avoid blurry details, distorted objects, unwanted text and watermarks."},
+{id:7,name:"Product Description Generator",icon:"🛍️",cat:"Business",desc:"Draft product descriptions.",hint:"Enter product name and features",make:(t)=>t+"\n\nDiscover a practical solution designed with your everyday needs in mind. Explore its key features, benefits and possible uses to see whether it suits your requirements.\n\nKey features:\n- "+t+" and its main benefits\n- Designed for convenient use\n- Consider the specifications and compatibility\n\nBefore publishing, add verified product specifications, accurate benefits, pricing and any relevant warranty details."},
+{id:8,name:"Email Draft Generator",icon:"📧",cat:"Writing",desc:"Create a simple email draft.",hint:"Enter recipient and email purpose",make:(t)=>"Subject: Regarding "+t+"\n\nHello,\n\nI hope you are doing well.\n\nI am writing regarding "+t+". I would appreciate the opportunity to discuss this further and learn about the next steps.\n\nThank you for your time and consideration. I look forward to hearing from you.\n\nBest regards,\n[Your Name]"},
+{id:9,name:"Real Estate Description",icon:"🏠",cat:"Business",desc:"Draft property listing descriptions.",hint:"Enter property details, location and features",make:(t)=>"Property Overview\n\nExplore this property: "+t+".\n\nProperty Highlights\n- Property type and layout: add verified details\n- Bedrooms and bathrooms: specify accurate numbers\n- Location: describe nearby amenities accurately\n- Features: include confirmed property features\n\nArrange a viewing to learn more about the property and its suitability for your needs.\n\nNote: Verify all property details before publishing."},
+{id:10,name:"AI Prompt Generator",icon:"💡",cat:"Creative",desc:"Turn an idea into a reusable AI prompt.",hint:"What do you want AI to help you with?",make:(t,tone)=>"Act as an experienced specialist in the following task: "+t+".\n\nObjective: Deliver a useful, accurate and practical result.\nAudience: Identify the intended audience and adapt the language accordingly.\nStyle: "+tone+".\nInstructions:\n1. Understand the task and identify missing information.\n2. Organize the response into clear sections.\n3. Include relevant examples where useful.\n4. Avoid invented facts and clearly state uncertainty.\n5. Review the result for clarity and accuracy.\n\nProvide the final answer in a well-organized format."}
+];
+
+let selected = tools[0];
+let category = "All";
+const grid = document.getElementById("grid");
+const box = document.getElementById("toolbox");
+const topic = document.getElementById("topic");
+const result = document.getElementById("result");
+const resultActions = document.getElementById("resultActions");
+
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ grid.innerHTML="";
+ tools.filter(t=>(category==="All"||t.cat===category)&&
+ (t.name+" "+t.desc+" "+t.cat).toLowerCase().includes(q))
+ .forEach(t=>{
+  const card=document.createElement("article");
+  card.className="card";
+  const icon=document.createElement("div");icon.className="icon";icon.textContent=t.icon;
+  const h=document.createElement("h3");h.textContent=t.name;
+  const p=document.createElement("p");p.textContent=t.desc;
+  const b=document.createElement("button");b.className="primary";b.textContent="Use Tool";
+  b.onclick=()=>openTool(t);
+  card.append(icon,h,p,b);grid.appendChild(card);
+ });
+}
+function openTool(t){
+ selected=t;
+ document.getElementById("toolTitle").textContent=t.icon+" "+t.name;
+ document.getElementById("toolDescription").textContent=t.desc;
+ topic.placeholder=t.hint;
+ box.classList.add("show");
+ result.hidden=true;resultActions.hidden=true;
+ box.scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.getElementById("search").addEventListener("input",render);
+document.querySelectorAll("#categories button").forEach(b=>b.onclick=()=>{
+ category=b.dataset.cat;
+ document.querySelectorAll("#categories button").forEach(x=>x.classList.toggle("active",x===b));
+ render();
+});
+document.getElementById("generate").onclick=()=>{
+ const t=topic.value.trim();
+ if(!t){topic.focus();topic.placeholder="Please enter a topic first";return;}
+ result.textContent=selected.make(t,document.getElementById("tone").value);
+ result.hidden=false;resultActions.hidden=false;
+};
+document.getElementById("clear").onclick=()=>{
+ topic.value="";result.textContent="";result.hidden=true;resultActions.hidden=true;
+};
+document.getElementById("copy").onclick=async()=>{
+ try{
+  await navigator.clipboard.writeText(result.textContent);
+  document.getElementById("copy").textContent="Copied!";
+  setTimeout(()=>document.getElementById("copy").textContent="Copy Result",1500);
+ }catch(e){alert("Copy is unavailable here. Please select and copy the text manually.");}
+};
+document.getElementById("download").onclick=()=>{
+ const blob=new Blob([result.textContent],{type:"text/plain;charset=utf-8"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download="ai-tool-result.txt";a.click();
+ URL.revokeObjectURL(url);
+};
+document.getElementById("year").textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
